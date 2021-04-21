@@ -1,0 +1,53 @@
+id: github.com/cloud-native-toolkit/terraform-ibm-transit-gateway
+name: ibm-transit-gateway
+type: terraform
+description: Provisions the IBM Cloud Transit Gateway with connections to VPC instances
+tags:
+  - infrastructure
+  - networking
+versions:
+  - platforms: []
+    dependencies:
+      - id: resource-group
+        refs:
+          - source: github.com/cloud-native-toolkit/terraform-ibm-resource-group
+            version: ">= 2.1.0"
+      - id: vpc
+        refs:
+          - source: github.com/cloud-native-toolkit/terraform-ibm-vpc
+            version: ">= 1.0.0"
+    variables:
+      - name: resource_group_name
+        moduleRef:
+          id: resource-group
+          output: name
+        type: string
+        description: Resource group where the cluster has been provisioned.
+      - name: connections
+        moduleRef:
+          id: vpc
+          output: crn
+        type: list(string)
+        description: The list of vpc instance resource_crn to add network connections for.
+      - name: region
+        scope: global
+        type: string
+        description: Geographic location of the resource (e.g. us-south, us-east)
+      - name: name
+        scope: module
+        type: string
+        description: The name that should be used for the service, particularly when connecting to an existing service. If not provided then the name will be defaulted to {name prefix}-{service}
+        default: ""
+        optional: true
+      - name: name_prefix
+        scope: global
+        type: string
+        description: The prefix name for the service. If not provided it will default to the resource group name
+        default: ""
+        optional: true
+      - name: ibmcloud_api_key
+        scope: global
+        type: string
+        description: The api key for IBM Cloud access
+    version: v0.0.1
+    outputs: []
