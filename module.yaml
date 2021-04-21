@@ -15,6 +15,7 @@ versions:
       refs:
         - source: github.com/cloud-native-toolkit/terraform-ibm-vpc
           version: ">= 1.0.0"
+      discriminator: "*"
   variables:
     - name: resource_group_name
       moduleRef:
@@ -24,6 +25,7 @@ versions:
       moduleRef:
         id: vpc
         output: crn
+      mapper: collect
     - name: region
       scope: global
     - name: name
