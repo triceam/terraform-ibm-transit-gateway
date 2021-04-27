@@ -1,4 +1,4 @@
-# Transit Gateway terraform module
+# Transit Gateway terraform module.  
 
 Provisions a transit gateway instance and creates connections to vpc instances.
 
